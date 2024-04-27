@@ -1,4 +1,4 @@
-```
+
 # Docker FastAPI Integration
 
 This project demonstrates the integration of FastAPI with Docker to manage Docker containers via a RESTful API. It provides endpoints to list containers, show container details and logs, kill containers, and start containers.
