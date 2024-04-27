@@ -60,5 +60,5 @@ To run the application, use the following command:
 uvicorn main:app --reload --port 8000
 ```
 
-This command starts the FastAPI server with auto-reload enabled, listening on port 8000. You can access the API at `http://localhost:8000`.
+This command starts the FastAPI server with auto-reload enabled, listening on port 8000. You can access the API at `http://localhost:8000/docs`.
 ```
