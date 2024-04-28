@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from app.service.Docker import DockerHub
+from fastapi.middleware.cors import CORSMiddleware
 
 class Web:
     def init():
@@ -8,6 +9,16 @@ class Web:
         Initialize the FastAPI application.
         """
         app = FastAPI()
+        origins = [
+            "http://localhost:5173",
+        ]
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=origins,
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
 
         @app.get("/list")
         async def list_containers():
@@ -18,7 +29,7 @@ class Web:
                 dict: A dictionary containing container information.
             """
             return {
-                "data": {"containers": DockerHub.list()},
+                "containers": DockerHub.list(),
                 "message": "Success"
             }
 

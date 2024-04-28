@@ -7,13 +7,16 @@ class DockerHub():
             dict: A dictionary containing container information.
         """
         client = docker.from_env()
-        containers = client.containers.list()
+        containers = client.containers.list(all=True)
         container_list = []
         for container in containers:
+            container_info = container.attrs
+            ports = container_info['HostConfig']['PortBindings']
             container_list.append({
                 "id": container.id,
                 "name": container.name,
-                "status": container.status
+                "status": container.status,
+                "port" : container.ports
             })
         return container_list
     
@@ -50,11 +53,14 @@ class DockerHub():
             client = docker.from_env()
             container = client.containers.get(container_id)
             logs = container.logs(tail=10)
+            container_info = container.attrs
+            ports = container_info['HostConfig']['PortBindings']
             return {
                         "id": container.id,
                         "name": container.name,
                         "status": container.status,
-                        "logs": logs.decode("utf-8").split("\n")
+                        "logs": logs.decode("utf-8").split("\n"),
+                        "port":ports
             }
         
     def start(container_id):
