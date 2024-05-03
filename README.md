@@ -3,6 +3,13 @@
 
 This project demonstrates the integration of FastAPI with Docker to manage Docker containers via a RESTful API. It provides endpoints to list containers, show container details and logs, kill containers, and start containers.
 
+# Docker FastAPI Integration with Vue GUI
+
+This project provides a graphical user interface (GUI) using Vue for administering Docker container management package. It enables managing Docker containers via a RESTful API.
+
+[Docker-FastAPI-Integration-with-Vue-GUI](https://github.com/saleh-saspx/Docker-FastAPI-Integration-with-Vue-GUI).
+
+
 ## Installation
 
 ### Python 3 Installation
