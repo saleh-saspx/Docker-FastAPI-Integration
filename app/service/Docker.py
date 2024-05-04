@@ -64,12 +64,14 @@ class DockerHub():
             logs = container.logs(tail=10)
             container_info = container.attrs
             ports = container_info['HostConfig']['PortBindings']
+            stats = container.stats(stream=False)
             return {
                         "id": container.id,
                         "name": container.name,
                         "status": container.status,
                         "logs": logs.decode("utf-8").split("\n"),
-                        "port":ports
+                        "port":ports,
+                        "stats" : stats
             }
         
     def start(container_id):
