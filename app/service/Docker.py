@@ -91,3 +91,18 @@ class DockerHub():
                 return "Container Not Found"
             except docker.errors.APIError as e:
                 return str(e)
+
+    def logs(container_id, logs=10):
+        """
+        This function retrieves logs of a Docker container and returns them in chronological order.
+
+        :param container_id: string, the ID or name of the Docker container.
+        :param logs: integer, the number of log lines you want to retrieve. Default is 10 lines.
+        :return: list of strings, the container logs in chronological order (from newest to oldest).
+        """
+        client = docker.from_env()
+        container = client.containers.get(container_id)
+        raw_logs = container.logs(tail=logs).decode('utf-8')  # Decode the string as UTF-8
+        log_lines = raw_logs.split("\n") # Split the logs line by line
+        log_lines.reverse()  # Reverse the logs
+        return log_lines

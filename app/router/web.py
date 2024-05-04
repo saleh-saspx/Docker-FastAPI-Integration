@@ -79,6 +79,23 @@ class Web:
                 "message": DockerHub.start(container_id)
             }
 
+        @app.get("/logs/{container_id}/{count}")
+        async def logs(container_id: str,count: int):
+            """
+            get logs a specific Docker container.
+
+            Args:
+                container_id (str): The ID of the container to start.
+                count (int): Number Of count
+
+            Returns:
+                dict: A Logs
+            """
+            return {
+                "data": DockerHub.logs(container_id,count),
+                "message" : "Accept"
+            }
+
         @app.get("/docs", response_class=HTMLResponse)
         async def custom_swagger_ui_html():
             """
